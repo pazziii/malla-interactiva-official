@@ -1,116 +1,130 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Malla Curricular Enfermería</title>
-  <style>
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background: #fff0f5;
-      padding: 40px;
-      text-align: center;
-    }
-
-    h1 {
-      color: #d63384;
-    }
-
-    .ramo {
-      display: inline-block;
-      padding: 12px 18px;
-      margin: 12px;
-      border-radius: 15px;
-      background-color: #f8cce7;
-      color: white;
-      font-weight: bold;
-      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-      cursor: not-allowed;
-      transition: all 0.3s ease;
-    }
-
-    .ramo:hover {
-      transform: scale(1.05);
-    }
-
-    .ramo.activo {
-      background-color: #f06292;
-      cursor: pointer;
-    }
-
-    .ramo.completado {
-      background-color: #d63384;
-    }
-
-    .semestre {
-      margin-bottom: 40px;
-    }
-
-    h2 {
-      color: #c2185b;
-    }
-  </style>
+<meta charset="UTF-8" />
+<title>Malla Curricular Interactiva en Cuadricula</title>
+<style>
+  body {
+    font-family: "Segoe UI", sans-serif;
+    background: #fff0f5;
+    padding: 40px;
+    text-align: center;
+  }
+  h1 {
+    color: #d63384;
+    margin-bottom: 30px;
+  }
+  table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 90%;
+    max-width: 900px;
+  }
+  th, td {
+    border: 2px solid #f8cce7;
+    padding: 15px;
+    border-radius: 12px;
+    background-color: #f8cce7;
+    color: white;
+    font-weight: bold;
+    cursor: not-allowed;
+    transition: all 0.3s ease;
+    min-width: 150px;
+    user-select: none;
+  }
+  th {
+    background-color: #f06292;
+    cursor: default;
+  }
+  td.activo {
+    background-color: #f06292;
+    cursor: pointer;
+  }
+  td.completado {
+    background-color: #d63384;
+  }
+  td.activo:hover {
+    transform: scale(1.05);
+  }
+</style>
 </head>
 <body>
   <h1>Malla Curricular Interactiva 💖</h1>
 
-  <div class="semestre">
-    <h2>Semestre V</h2>
-    <div class="ramo activo" id="adulto" onclick="desbloquear(['adultoMayor','mujerRecienNacido','altSaludMental','etica'], this)">Gestión del Cuidado en el Adulto</div>
-    <div class="ramo activo" id="admin" onclick="desbloquear(['adultoMayor','serviciosClinicos'], this)">Administración en Enfermería</div>
-    <div class="ramo activo" id="saludMental" onclick="desbloquear(['adultoMayor','mujerRecienNacido','altSaludMental'], this)">Enfermería en Salud Mental</div>
-  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Semestre</th>
+        <th>Ramo 1</th>
+        <th>Ramo 2</th>
+        <th>Ramo 3</th>
+        <th>Ramo 4</th>
+        <th>Ramo 5</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Semestre V</td>
+        <td id="adulto" class="activo" onclick="desbloquear(['adultoMayor','mujerRecienNacido','altSaludMental','etica'], this)">Gestión del Cuidado en el Adulto</td>
+        <td id="admin" class="activo" onclick="desbloquear(['adultoMayor','serviciosClinicos'], this)">Administración en Enfermería</td>
+        <td id="saludMental" class="activo" onclick="desbloquear(['adultoMayor','mujerRecienNacido','altSaludMental'], this)">Enfermería en Salud Mental</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Semestre VI</td>
+        <td id="adultoMayor" onclick="desbloquear(['urgencia','ninoNina'], this)">Gestión del Cuidado en el Adulto Mayor</td>
+        <td id="serviciosClinicos" onclick="marcarCompletado(this)">Gestión en Servicios Clínicos</td>
+        <td id="mujerRecienNacido" onclick="desbloquear(['urgencia','ninoNina'], this)">Gestión del Cuidado en la Mujer y RN</td>
+        <td id="altSaludMental" onclick="desbloquear(['urgencia','ninoNina'], this)">Enfermería en Alteraciones de Salud Mental</td>
+        <td id="bioestadistica" class="activo" onclick="desbloquear(['investigacion1'], this)">Bioestadística</td>
+      </tr>
+      <tr>
+        <td>Semestre VII</td>
+        <td id="urgencia" onclick="desbloquear(['urgenciaServicios','saludComunitaria2'], this)">Enfermería en Urgencia</td>
+        <td id="ninoNina" onclick="desbloquear(['urgenciaServicios','adolescente','saludComunitaria2'], this)">Gestión del Cuidado en el Niño y la Niña</td>
+        <td id="etica" onclick="marcarCompletado(this)">Ética en Enfermería</td>
+        <td id="investigacion1" onclick="desbloquear(['investigacion2'], this)">Investigación I</td>
+        <td id="electivo" class="activo" onclick="marcarCompletado(this)">Electivo Profesional</td>
+      </tr>
+      <tr>
+        <td>Semestre VIII</td>
+        <td id="urgenciaServicios" onclick="desbloquear(['internadoIntra','internadoExtra'], this)">Gestión del Cuidado en Servicios de Urgencia</td>
+        <td id="adolescente" onclick="desbloquear(['internadoIntra','internadoExtra'], this)">Gestión del Cuidado en el Adolescente</td>
+        <td id="saludComunitaria2" onclick="desbloquear(['internadoIntra','internadoExtra'], this)">Enfermería en Salud Comunitaria II</td>
+        <td id="investigacion2" onclick="desbloquear(['internadoIntra','internadoExtra'], this)">Investigación II</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Semestre IX-X</td>
+        <td id="internadoIntra" onclick="marcarCompletado(this)">Internado Intra</td>
+        <td id="internadoExtra" onclick="marcarCompletado(this)">Internado Extra</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 
-  <div class="semestre">
-    <h2>Semestre VI</h2>
-    <div class="ramo" id="adultoMayor" onclick="desbloquear(['urgencia','ninoNina'], this)">Gestión del Cuidado en el Adulto Mayor</div>
-    <div class="ramo" id="serviciosClinicos" onclick="marcarCompletado(this)">Gestión en Servicios Clínicos</div>
-    <div class="ramo" id="mujerRecienNacido" onclick="desbloquear(['urgencia','ninoNina'], this)">Gestión del Cuidado en la Mujer y RN</div>
-    <div class="ramo" id="altSaludMental" onclick="desbloquear(['urgencia','ninoNina'], this)">Enfermería en Alteraciones de Salud Mental</div>
-    <div class="ramo activo" id="bioestadistica" onclick="desbloquear(['investigacion1'], this)">Bioestadística</div>
-  </div>
-
-  <div class="semestre">
-    <h2>Semestre VII</h2>
-    <div class="ramo" id="urgencia" onclick="desbloquear(['urgenciaServicios','saludComunitaria2'], this)">Enfermería en Urgencia</div>
-    <div class="ramo" id="ninoNina" onclick="desbloquear(['urgenciaServicios','adolescente','saludComunitaria2'], this)">Gestión del Cuidado en el Niño y la Niña</div>
-    <div class="ramo" id="etica" onclick="marcarCompletado(this)">Ética en Enfermería</div>
-    <div class="ramo" id="investigacion1" onclick="desbloquear(['investigacion2'], this)">Investigación I</div>
-    <div class="ramo activo" id="electivo" onclick="marcarCompletado(this)">Electivo Profesional</div>
-  </div>
-
-  <div class="semestre">
-    <h2>Semestre VIII</h2>
-    <div class="ramo" id="urgenciaServicios" onclick="desbloquear(['internadoIntra','internadoExtra'], this)">Gestión del Cuidado en Servicios de Urgencia</div>
-    <div class="ramo" id="adolescente" onclick="desbloquear(['internadoIntra','internadoExtra'], this)">Gestión del Cuidado en el Adolescente</div>
-    <div class="ramo" id="saludComunitaria2" onclick="desbloquear(['internadoIntra','internadoExtra'], this)">Enfermería en Salud Comunitaria II</div>
-    <div class="ramo" id="investigacion2" onclick="desbloquear(['internadoIntra','internadoExtra'], this)">Investigación II</div>
-  </div>
-
-  <div class="semestre">
-    <h2>Internados</h2>
-    <div class="ramo" id="internadoIntra" onclick="marcarCompletado(this)">Internado Intra</div>
-    <div class="ramo" id="internadoExtra" onclick="marcarCompletado(this)">Internado Extra</div>
-  </div>
-
-  <script>
-    function desbloquear(siguientes, actual) {
-      const siguientesRamos = siguientes.map(id => document.getElementById(id));
-      siguientesRamos.forEach(ramo => {
-        if (!ramo.classList.contains('completado')) {
-          ramo.classList.add('activo');
-          ramo.style.cursor = 'pointer';
-        }
-      });
-      actual.classList.add('completado');
-      actual.classList.remove('activo');
-    }
-
-    function marcarCompletado(ramo) {
-      if (ramo.classList.contains('activo')) {
-        ramo.classList.add('completado');
-        ramo.classList.remove('activo');
+<script>
+  function desbloquear(siguientes, actual) {
+    const siguientesRamos = siguientes.map(id => document.getElementById(id));
+    siguientesRamos.forEach(ramo => {
+      if (!ramo.classList.contains('completado')) {
+        ramo.classList.add('activo');
+        ramo.style.cursor = 'pointer';
       }
+    });
+    actual.classList.add('completado');
+    actual.classList.remove('activo');
+  }
+
+  function marcarCompletado(ramo) {
+    if (ramo.classList.contains('activo')) {
+      ramo.classList.add('completado');
+      ramo.classList.remove('activo');
     }
-  </script>
+  }
+</script>
 </body>
 </html>
